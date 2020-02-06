@@ -1,0 +1,23 @@
+if "action" in manag:
+            action = manag['action']
+
+            if action == "getUsers":
+                response = logics.getAllUsers()
+
+                status_code = 200
+            
+            elif action == "addUser":
+                if 'login' in manag and 'password' in manag:
+                    response = logics.adduser(login=manag['login'], password=manag['password'])
+
+                    status_code = 200
+                else:
+                    response = {"flag": "missedInfos", "message": "login password"}
+
+                    status_code = 400
+            
+            else:
+                response["flag"] = "invalidAction"
+                response['message'] = "action invalide"
+
+                status_code = 400
